@@ -281,6 +281,13 @@ export class HomePage {
     });
 
     filteredTags.forEach(element => {
+
+      let tagObj = {
+        patrimony: null,
+        tag: element.slice(22, 28)
+      };
+      this.tags.push(tagObj);
+
       this.isIncluded(element.slice(22, 28), status => {
         console.log('isIncluded=> ' + element.slice(22, 28) + ' status=> ', status);
 
@@ -321,9 +328,8 @@ export class HomePage {
 
   public isIncluded(element, cb) {
     let included = false;
-    console.log("Length Tags:" + this.tags.length);
     for (var i = 0; i < this.tags.length; i++) {
-      if (this.tags[i].tag === element) {
+      if (this.tags[i].tag == element) {
         included = true;
         break;
       } 
