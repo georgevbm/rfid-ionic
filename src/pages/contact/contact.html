@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Cadastro
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="newPatrimonyForm" (ngSubmit)="onSubmit()">
+    <ion-row>
+      <ion-col col-12>
+        <ion-row class='box-campos'>
+          <ion-item col-11>
+            <ion-label> Nome do Patrimônio </ion-label>
+            <ion-textarea autosize [(ngModel)]="name" formControlName="name"></ion-textarea>
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-row class='box-campos'>
+          <ion-item col-11>
+            <ion-label> Descrição do Patrimônio </ion-label>
+            <ion-textarea autosize [(ngModel)]="description" formControlName="description"></ion-textarea>
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-row class='box-campos'>
+          <ion-item col-11>
+            <ion-label> Id da tag </ion-label>
+            <ion-textarea autosize [(ngModel)]="tagId" formControlName="tagId"></ion-textarea>
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="box-butttons">
+      <ion-item>
+        <button color='padrao' ion-button type="submit">Salvar</button>
+      </ion-item>
+    </ion-row>
+    
+  </form>
+</ion-content>

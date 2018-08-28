@@ -1,0 +1,7 @@
+{
+  "name": "inventoryControl",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

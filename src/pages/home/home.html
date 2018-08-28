@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+
+    <button (click)="scan()" ion-button icon-only>
+      <ion-icon style="font-size:25px" ios="ios-search" md="md-search"></ion-icon>
+    </button>
+
+    <!-- <button [disabled]="!connected" (click)="isConnected()" ion-button icon-only>
+      <ion-icon ios="ios-warning" md="md-warning"></ion-icon>
+    </button> -->
+
+
+    <button [disabled]="!connected" ion-button icon-only>
+      <ion-icon disabled style="font-size:25px" *ngIf="showBeep" (click)="toogleBeep(false)" ios="ios-volume-mute" md="md-volume-mute"></ion-icon>
+      <ion-icon style="font-size:25px" *ngIf="!showBeep" (click)="toogleBeep(true)" ios="ios-volume-off" md="md-volume-off"></ion-icon>
+    </button>
+
+    <button [disabled]="!connected" *ngIf="!inventoring" (click)="getInventory()" ion-button icon-only>
+      <ion-icon name="play"></ion-icon>
+    </button>
+
+    <button [disabled]="!connected" *ngIf="inventoring" (click)="stop()" ion-button icon-only>
+      <ion-icon ios="ios-square" md="md-square"></ion-icon>
+    </button>
+
+    <button [disabled]="!connected" (click)="clear()" ion-button icon-only>
+      <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+    </button>
+
+    <button *ngIf="connected" (click)="sendDislink()" ion-button icon-only>
+      <ion-icon ios="ios-close" md="md-close"></ion-icon>
+    </button>
+
+    <button *ngIf="connected" (click)="turnOff()" ion-button icon-only>
+      <ion-icon ios="ios-power" md="md-power"></ion-icon>
+    </button>
+
+  <!-- <button (click)="getBatteryLevel()" ion-button icon-only>
+      <ion-icon ios="ios-power" md="md-power"></ion-icon>
+    </button>  -->
+
+
+    <ion-icon style="font-size:25px; color:#22d022" *ngIf="connected" ios="ios-radio-button-on" md="md-radio-button-on"></ion-icon>
+    <ion-icon style="font-size:25px; color:red" *ngIf="!connected" ios="ios-radio-button-on" md="md-radio-button-on"></ion-icon>
+
+    <ion-icon *ngIf="connected" style="font-size:25px;" ios="ios-battery-full" md="md-battery-full">{{batteryLevel}}%</ion-icon>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <p>{{status}}</p>
+
+  <ion-card *ngIf="devices.length">
+    <ion-card-header>
+      Dispositivos encontrados:
+    </ion-card-header>
+
+    <ion-list>
+      <button (click)="handleConnection(item)" *ngFor="let item of devices" ion-item>
+        <ion-icon ios="ios-bluetooth" md="md-bluetooth"></ion-icon>
+        {{item.name}}
+      </button>
+
+    </ion-list>
+  </ion-card>
+
+  <p (click)="info(item)" *ngFor="let item of tags">
+    {{item.tag}} -
+    <span *ngIf="item && item.patrimony && item.patrimony.name">{{item.patrimony.name}}</span>
+  </p>
+
+</ion-content>
