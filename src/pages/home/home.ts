@@ -53,7 +53,6 @@ export class HomePage {
           this.zone.run(() => {
             // this.batteryLevel = data.slice(6, 8);
             let result = data.match(/\d+/g);
-            alert(result);
             if (result && result.length) {
               this.batteryLevel = result[0];
               console.log('batteryLevel', this.batteryLevel);
@@ -282,35 +281,45 @@ export class HomePage {
 
     filteredTags.forEach(element => {
 
-      let tagObj = {
-        patrimony: null,
-        tag: element.slice(22, 28)
-      };
-      this.tags.push(tagObj);
+      console.log("Length Tag:" + this.tags.length);
+      if(this.tags.length == 0){
+        this.addTagArray(element);
+      }
 
       this.isIncluded(element.slice(22, 28), status => {
         console.log('isIncluded=> ' + element.slice(22, 28) + ' status=> ', status);
 
         if (!status) {
-          this.getPatrimonyByTag(element.slice(22, 28), (data, err) => {
-            if (err) {
-              console.log('err', data)
-            }
-            if (data != null) {
-              let tagObj = {
-                patrimony: data,
-                tag: element.slice(22, 28)
-              };
-              console.log('taaab=> ', tagObj);
-              this.zone.run(() => {
-                console.log('oook');
-                this.tags.push(tagObj);
-              });
-            }
-          })
+          console.log("Entrou if!!!!!!!!!!!");
+          this.addTagArray(element);
+
+          // this.getPatrimonyByTag(element.slice(22, 28), (data, err) => {
+          //   if (err) {
+          //     console.log('err', data)
+          //   }
+          //   if (data != null) {
+          //     let tagObj = {
+          //       patrimony: data,
+          //       tag: element.slice(22, 28)
+          //     };
+          //     console.log('taaab=> ', tagObj);
+          //     this.zone.run(() => {
+          //       console.log('oook');
+          //       this.tags.push(tagObj);
+          //     });
+          //   }
+          // })
         }
       })
     });
+  }
+
+  addTagArray(tag: String){
+    let tagObj = {
+      patrimony: null,
+      tag: tag.slice(22, 28)
+    };
+    this.tags.push(tagObj);
   }
 
   getPatrimonyByTag(tag: String, cb) {
